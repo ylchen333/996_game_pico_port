@@ -1,0 +1,118 @@
+:root {
+  color: #b8e6c2;
+  background: #060907;
+  font-family: "SF Mono", ui-monospace, "Cascadia Mono", Menlo, monospace;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { min-height: 100%; margin: 0; }
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 0%, #0c1a10 0%, transparent 55%), #060907;
+}
+button, input { font: inherit; }
+
+.loading-shell, .stage {
+  width: min(680px, 90vw);
+  min-height: 100vh;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px 0 36px;
+  text-align: center;
+}
+.loading-shell { align-items: center; letter-spacing: .12em; }
+.hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  color: #78a985;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,.14) 0 1px, transparent 1px 4px);
+}
+.spatial-panel { position: relative; }
+.narrative-panel {
+  padding: 18px 22px;
+  border: 1px solid #24412e;
+  border-radius: 16px;
+  background: rgba(8, 16, 10, .9);
+  line-height: 1.6;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.narrative-panel p { margin: 0; }
+.status-line { margin-top: 10px !important; color: #e98c85; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.controls { display: flex; justify-content: center; padding: 14px; border-radius: 16px; background: rgba(8,16,10,.86); }
+.controls form { width: 100%; display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.controls small { grid-column: 1 / -1; color: #5d8a68; }
+.command-line { display: flex; gap: 10px; align-items: center; min-height: 52px; padding: 0 16px; border: 1px solid #294633; border-radius: 12px; }
+.command-line span { color: #4bd07a; }
+.command-line input { width: 100%; border: 0; outline: 0; background: transparent; color: #d7f5de; font-size: 17px; }
+button {
+  min-width: 150px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 1px solid #4bd07a;
+  border-radius: 12px;
+  background: rgba(75,208,122,.1);
+  color: #4bd07a;
+  letter-spacing: .14em;
+  cursor: pointer;
+}
+button:hover, button:focus-visible { background: #4bd07a; color: #04150a; outline: none; }
+button:disabled { opacity: .45; cursor: wait; }
+.image-window-button { align-self: center; border-color: #78a985; color: #9fcfab; font-size: 12px; }
+.stage[data-state="outcome-negative"] button { border-color: #e0645c; color: #e0645c; }
+
+.image-view-page, .image-view-page body, .image-view-page #root {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background: #050806;
+}
+.image-view-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #050806;
+}
+.image-view-shell img { width: 100%; height: 100%; display: block; object-fit: contain; }
+.image-view-shell p { color: #5d8a68; text-align: center; letter-spacing: .12em; line-height: 1.8; }
+.image-view-shell small { font-size: 11px; }
+
+html.is-spatial {
+  background: transparent;
+  --xr-background-material: transparent;
+}
+html.is-spatial body { background: transparent; }
+html.is-spatial .hud { --xr-back: 24px; --xr-background-material: translucent; border-radius: 14px; }
+html.is-spatial .narrative-panel { --xr-back: 44px; --xr-background-material: translucent; background: rgba(8,16,10,.36); }
+html.is-spatial .controls { --xr-back: 64px; --xr-background-material: translucent; background: rgba(8,16,10,.26); }
+html.is-spatial.image-view-page { --xr-background-material: none; background: #050806; }
+html.is-spatial.image-view-page body { background: #050806; }
+
+@media (max-width: 620px) {
+  .stage { width: 96vw; padding: 10px 0 18px; }
+  .controls form { grid-template-columns: 1fr; }
+  .controls small { grid-column: auto; }
+  .controls button { width: 100%; }
+}
